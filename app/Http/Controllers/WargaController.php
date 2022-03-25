@@ -11,7 +11,7 @@ class WargaController extends Controller
     public function index()
     {
         $data = Model::orderBy('nik')->get();
-        $mutasi = Mutasi::all();
+        $mutasi = Mutasi::orderBy('nama', 'asc')->get();
 
         return view('admin.warga', compact('data', 'mutasi'));
     }
@@ -31,14 +31,14 @@ class WargaController extends Controller
 
     public function store(Request $req)
     {
-        $data = $this->validate($req, array_merge(Model::rules, [
-            'file_ktp' => 'required|file',
-        ]));
+        $data = $this->validate($req, Model::rules);
 
-        $fileKtp = $req->file('file_ktp');
-        $fileKtpName = date('Ymdhis') . '.' . $fileKtp->getClientOriginalExtension();
-        $fileKtp->move(Model::fileKtpPath, $fileKtpName);
-        $data['file_ktp'] = $fileKtpName;
+        if ($req->file_ktp) {
+            $fileKtp = $req->file('file_ktp');
+            $fileKtpName = date('Ymdhis') . '.' . $fileKtp->getClientOriginalExtension();
+            $fileKtp->move(Model::fileKtpPath, $fileKtpName);
+            $data['file_ktp'] = $fileKtpName;
+        }
 
         Model::create($data);
         $this->notif('data berhasil ditambah', 'success');

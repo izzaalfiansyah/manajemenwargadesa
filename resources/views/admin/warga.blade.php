@@ -16,7 +16,13 @@
                     <td>{{ $item->tempat_lahir }}, {{ $item->tanggal_lahir_local }}</td>
                     <td>{{ $item->pekerjaan }}</td>
                     <td>
-                        <a href="{{ $item->file_ktp_url }}" target="_blank">Lihat</a>
+                        @if ($item->file_ktp)
+                            <a href="{{ $item->file_ktp_url }}" target="_blank">
+                                Lihat
+                            </a>
+                        @else
+                            -
+                        @endif
                     </td>
                     <td>{{ $item->mutasi->nama }}</td>
                     <td align="center">
@@ -59,8 +65,16 @@
                     <x-text-field number label="NIK" name="nik" maxlength="16" minlength="16" required placeholder="350904xxxxxxxxx"></x-text-field>
                     <x-text-field label="Nama" name="nama" required placeholder="Masukkan Nama"></x-text-field>
                     <x-text-field label="Tempat Lahir" name="tempat_lahir" required placeholder="Masukkan Tempat Lahir"></x-text-field>
-                    <x-text-field label="Tanggal Lahir" type="date" name="tanggal_lahir" required></x-text-field>
-                    <x-text-field label="Agama" name="agama" required placeholder="Islam / Kristen / Hindu / Buddha"></x-text-field>
+                    <x-text-field label="Tanggal Lahir" type="date" placeholder="dd-mm-yyyy" name="tanggal_lahir" required></x-text-field>
+                    <x-select label="Agama" name="agama" required>
+                        <option value="" disabled>Pilih Agama</option>
+                        <option value="Islam">Islam</option>
+                        <option value="Kristen">Kristen</option>
+                        <option value="Katolik">Katolik</option>
+                        <option value="Hindu">Hindu</option>
+                        <option value="Budha">Budha</option>
+                        <option value="Konghucu">Konghucu</option>
+                    </x-select>
                 </div>
                 <div class="col-lg-6">
                     <x-text-field label="Pekerjaan" name="pekerjaan" required placeholder="Masukkan Pekerjaan"></x-text-field>
@@ -72,7 +86,7 @@
                         @endforeach
                     </x-select>
                     <x-text-field label="Status Anggota Keluarga" name="status_keluarga" required placeholder="Suami / Istri / Anak / Orang tua / Lainnya"></x-text-field>
-                    <x-text-field type="file" label="File KTP" name="file_ktp" required title="Pilih File KTP"></x-text-field>
+                    <x-text-field type="file" label="File KTP" name="file_ktp" title="Pilih File KTP"></x-text-field>
                 </div>
             </div>
 
@@ -93,7 +107,15 @@
                     <x-text-field label="Nama" name="nama" required placeholder="Masukkan Nama"></x-text-field>
                     <x-text-field label="Tempat Lahir" name="tempat_lahir" required placeholder="Masukkan Tempat Lahir"></x-text-field>
                     <x-text-field label="Tanggal Lahir" type="date" name="tanggal_lahir" required></x-text-field>
-                    <x-text-field label="Agama" name="agama" required placeholder="Islam / Kristen / Hindu / Buddha"></x-text-field>
+                    <x-select label="Agama" name="agama" required>
+                        <option value="" disabled>Pilih Agama</option>
+                        <option value="Islam">Islam</option>
+                        <option value="Kristen">Kristen</option>
+                        <option value="Katolik">Katolik</option>
+                        <option value="Hindu">Hindu</option>
+                        <option value="Budha">Budha</option>
+                        <option value="Konghucu">Konghucu</option>
+                    </x-select>
                 </div>
                 <div class="col-lg-6">
                     <x-text-field label="Pekerjaan" name="pekerjaan" required placeholder="Masukkan Pekerjaan"></x-text-field>

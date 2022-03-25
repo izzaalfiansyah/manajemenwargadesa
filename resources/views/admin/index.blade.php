@@ -7,8 +7,8 @@
     @php
         $statistics = [
             ['Data User', count(\App\Models\User::all())],
-            ['Data Warga', count(\App\Models\Warga::all())],
-            ['Data Inventaris', count(\App\Models\Inventaris::all())],
+            ['Data Warga Aktif', count(\App\Models\Warga::where('mutasi_id', '1')->get())],
+            ['Data Keluarga Aktif', count(\App\Models\Keluarga::all())],
         ];
 
         $items = [];

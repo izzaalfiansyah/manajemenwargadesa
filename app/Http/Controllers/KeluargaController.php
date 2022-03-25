@@ -17,14 +17,14 @@ class KeluargaController extends Controller
     public function show($id)
     {
         $data = Model::find($id);
-        $warga = \App\Models\Warga::all();
+        $warga = \App\Models\Warga::orderBy('nama', 'asc')->get();
 
         return view('admin.keluarga_show', compact('data', 'warga'));
     }
 
     public function create()
     {
-        $warga = \App\Models\Warga::all();
+        $warga = \App\Models\Warga::orderBy('nama', 'asc')->get();
 
         return view('admin.keluarga_create', compact('warga'));
     }

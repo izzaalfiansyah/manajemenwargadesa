@@ -84,6 +84,7 @@ class UserController extends Controller
                 if (Hash::check($req->password, $item->password)) {
                     $this->notif('berhasil login', 'success');
                     Session::put('id', $item->id);
+                    Session::put('role', $item->role);
 
                     return redirect(url('/dashboard'));
                 }
